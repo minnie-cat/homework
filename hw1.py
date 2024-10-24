@@ -23,7 +23,12 @@ def gram_schmidt(S1: np.ndarray):
     m, n = S1.shape
     S2 = np.zeros((m, n))
     # write uou code here
-
+    for i in range(n):
+        u = S1[:, i]
+        for j in range(i):
+            u = u - np.dot(S1[:, i], S2[:, j]) * S2[:, j]
+        S2[:, i] = u / np.linalg.norm(u)
+    
     return S2
 
 S1 = np.array([[ 7,  4,  7, -3, -9],

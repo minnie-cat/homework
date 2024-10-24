@@ -43,7 +43,7 @@ def mysvd(A):
     return U, Sigma, V
 
 # 讀取影像檔, 並保留亮度成分
-img = cv2.imread('data/svd_demo1.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('svd_demo1.jpg', cv2.IMREAD_GRAYSCALE)
 
 # convert img to float data type
 A = img.astype(dtype=np.float64)
@@ -57,8 +57,9 @@ def compute_energy(X: np.ndarray):
     # return energy of X
     # For more details on the energy of a 2D signal, see the 
     # class notebook: 內容庫/補充說明/Energy of a 2D Signal.
-    pass # remove pass and write your code here
-    
+    # remove pass and write your code here
+    return np.sum(X ** 2)
+
     
 # img_h and img_w are image's height and width, respectively
 img_h, img_w = A.shape
@@ -83,12 +84,11 @@ for r in rs:
 
 # 計算snr和作圖
 # write your code here
-SNR = 10 * np.log10(energy_A / energy_N[1:])
-
-plt.plot(rs, SNR, 'b-o')
-plt.xlabel('Number of Singular Values (r)')
+snr = 10 * np.log10(energy_A / energy_N[1:])
+plt.plot(rs, snr, 'b-')
+plt.xlabel('r (Number of Singular Values)')
 plt.ylabel('SNR (dB)')
-plt.title('SNR vs. Number of Singular Values')
+plt.title('SNR vs r')
 plt.grid(True)
 plt.show()
 
